@@ -30,4 +30,4 @@ To combine the two maps I have, I found two options online.
 I haven't tried these two and I don't know how and to what extent the before and after map containers can be modified
 
 My original idea was to have a swipe between three maps, but it seems too complicated and perhaps it isn't needed. 
-I have not tried yet how to combine the two maps and don't know if it will work. Sorry for all the delay
+I have not tried yet how to combine the two maps and don't know if it will work. 
