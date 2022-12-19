@@ -13,8 +13,8 @@
 		integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
 		crossorigin="" />
 
-	<!--Jquery for language change-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="scripts/leaflet-search.css" />
+
 
 	<!-- Fonts -->
 	<!-- <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,800;1,800&display=swap"
@@ -23,16 +23,18 @@
 	<style>
 		body {
 			background: #20282e;
-			font-family: 'Open Sans', sans-serif;
+			/*font-family: 'Open Sans', sans-serif; */
 			font-weight: 400;
 		}
 
 		h1 {
 			font-weight: 800;
+			font-family: 'Roboto', sans-serif; 
 		}
 
 		p {
 			line-height: 1.7rem;
+			font-family: 'Roboto', sans-serif; 
 		}
 
 		#map {
@@ -44,7 +46,7 @@
 			font-size: 1rem;
 			border-radius: 5px;
 			max-width: 200px;
-			font-family: 'Open Sans', sans-serif;
+			/*font-family: 'Open Sans', sans-serif;*/
 		}
 
 		#legend span {
@@ -62,6 +64,27 @@
 			content: '';
 			display: block;
 			clear: both;
+		}
+
+		.tooltip {
+			position: relative;
+			display: inline-block;
+			border-bottom: 1px dotted black;
+			/* If you want dots under the hoverable text */
+		}
+
+		.tooltiptext {
+			visibility: hidden;
+			width: 120px;
+			background-color: black;
+			color: #fff;
+			text-align: center;
+			padding: 5px 0;
+			border-radius: 6px;
+
+			/* Position the tooltip text - see examples below! */
+			position: absolute;
+			z-index: 1;
 		}
 
 		/* Small devices (landscape phones, 576px and up) */
@@ -105,8 +128,8 @@
 			<form action="">
 				<select type="text" id="dropBox" onchange="changeLang()">
 					<option value="en">English</option>
-					<option value="hi">Hindi</option>
-					<option value="mr">Marathi</option>
+					<option value="hi">हिंदी</option>
+					<option value="mr">मराठी</option>
 				</select>
 
 				<!--div id="divText">No template applied</div-->
@@ -118,47 +141,51 @@
 			<div class="col-md-9 col-lg-7 col-xl-8 order-md-2 px-0">
 				<div id="map"></div>
 			</div>
-			<div class='pointer'>
-				<< Click search button</div> <!--aside id="about"
-					class="col-md-4 col-lg-3 col-xl-2 order-md-1 text-white py-2 pl-3 bg-secondary overflow-auto" -->
-					<aside id="about"
-						class="col-md-3 col-lg-5 col-xl-4 order-md-1 text-white py-2 pl-3 bg-secondary overflow-auto">
-						<section>
+			<aside id="about"
+				class="col-md-3 col-lg-5 col-xl-4 order-md-1 text-white py-2 pl-3 bg-secondary overflow-auto">
+				<section>
 
-							<h3 class="py-2">
-								<div id="aboutMap">About this map</div>
-							</h3>
-							<div id=infoTab>
-								<p>In 2022, Mumbai city had the 11th highest Property Price Index
-									in the world (<a
-										href="https://www.numbeo.com/property-investment/rankings.jsp?title=2022"
-										target="blank">Numbeo, 2022</a>).
-									Land is limited in the peninsula and is frequently touted by the government as the
-									reason for a large number of informal houses (called bastis or slums, where 52% of
-									the city
-									residents stay).
-									However, there is very less information in the public sphere available about who
-									owns
-									land in the city, how much, and where.
-								</p>
-								<p>This map uses data that from the Municipal Corporation of greater Mumbai (MCGM)
-									obtained in
-									December 2020.
-									The dataset obtained has attributes on 'Ward', 'Ownership' and 'Land holder's name'
-									for land
-									parcels in Mumbai.
-								</p>
-							</div>
-						</section>
-					</aside>
+					<h3 class="py-2">
+						<div id="aboutMap">About this map</div>
+					</h3>
+					<div id=infoTab>
+						<p>The map shows who owns the land that informal settlements are built on. <br><br>
+							<img src="images/click.png" style="background-color:white;" width="40" height="40"></img> 
+							Click on a feature to see information on cluster ID, CTS number, and land owner.<br><br>
+							<img src="images/search-icon2.jpeg" style="background-color:white;" width="40" height="40"></img> 
+							Search for settlements by their name using the search icon on the map<br><br>
+							<img src="images/language.png" width="80" height="70" ></img> 
+							Change the language with the drop down<br>
+							
+						</p>
+						<p>This map uses data that from the Slum Rehabilitation Authority (SRA) and the Municipal Corporation of greater Mumbai (MCGM)
+							obtained in December 2020.
+							The dataset obtained has attributes on 'Cluster name', 'CTS number', 'Ownership' and 'Land holder's name'
+							for informal settlement clusters in Mumbai.
+						</p>
+
+					</div>
+				</section>
+			</aside>
+
 		</section>
 
 		<footer class="row bg-dark text-white py-3">
 			<div class="col">
-				<ul class="list-unstyled">
-					<li>authored by <a href="https://github.com/sanjana-krish" target="_blank">sanjana</a></li>
-					<li>Date of mapping: 11 Dec 2022; Date when data was extracted: Dec 2020</li>
-					<li>data source: <a href="#">MCGM portal</a></li>
+				<!-- <p style="font-size: 0.8em;">
+					Authored by <a href="https://github.com/sanjana-krish" target="_blank">sanjana</a> | Date: Dec 2022
+					<br>
+					Data sources: SRA, MCGM | leaflet search <a href="https://github.com/stefanocudini/leaflet-search"
+					target="_blank">Copyright (c) 2013-2020 Stefano Cudini</a>
+				</p> -->
+				<ul style="font-size: 0.8em;" class="list-unstyled">
+					<div id=sources>
+						<li>authored by <a href="https://github.com/sanjana-krish" target="_blank">sanjana</a> | Date:
+							Dec 2022</li>
+						<li>Data sources: SRA, MCGM | leaflet search <a
+								href="https://github.com/stefanocudini/leaflet-search" target="_blank">Copyright (c)
+								2013-2020 Stefano Cudini</a></li>
+					</div>
 				</ul>
 			</div>
 		</footer>
@@ -177,22 +204,23 @@
 		crossorigin=""></script>
 	<!-- then Simple Statistics -->
 	<script src='https://unpkg.com/simple-statistics@7.7.0/dist/simple-statistics.min.js'></script>
-	<!-- Load Leaflet from CDN-->
-	<!-- <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-	<script src="https://unpkg.com/leaflet/dist/leaflet-src.js"></script> -->
-	<!-- Load Esri Leaflet from CDN -->
-	<!-- <script src="https://unpkg.com/esri-leaflet"></script> -->
-	<!-- Esri Leaflet Geocoder -->
-	<!-- <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css" />
-	<script src="https://unpkg.com/esri-leaflet-geocoder"></script> -->
+
+	<!--Jquery for language change-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!--For local search-->
+	<script src="scripts/leaflet-search.js"></script>
+
+	<!--script src="scripts/helper/require.js"></script-->
 
 	<script>
-		// initial Leaflet map options
+		// initial Leaflet map optionst
 		const options = {
 			zoomSnap: .1,
-			center: [19.076, 72.97], //[40, -90],
+			//center: [19.076, 72.97], //[40, -90],
 			zoom: 11, //4,
 			zoomControl: false,
+
 		}
 
 		// create Leaflet map and apply options
@@ -201,59 +229,30 @@
 			position: "topleft"
 		}).addTo(map);
 
+
+
 		// request a basemap tile layer and add to the map
-		L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-		 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-		}).addTo(map);
-		//var tiles = L.esri.basemapLayer("Streets").addTo(map);
-
-		//Add search functionality to the map
-		// from https://github.com/Esri/esri-leaflet-geocoder
-
-		//L.control.scale().addTo(map);
-
-		// Create a Tile Layer and add it to the map
-		//var tiles = new L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png').addTo(map);
-		//L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		//	attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-		//}).addTo(map);
-
-		// var searchControl = new L.esri.Controls.Geosearch().addTo(map);
-
-		// var results = new L.LayerGroup().addTo(map);
-
-		// // create the geocoding control and add it to the map
-		// var searchControl = L.esri.Geocoding.geosearch({
-		// 	providers: [
-		// 		L.esri.Geocoding.arcgisOnlineProvider({
-		// 			// API Key to be passed to the ArcGIS Online Geocoding Service
-		// 			apikey: 'YOUR_API_KEY'
-		// 		})
-		// 	]
+		// L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+		// 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 		// }).addTo(map);
 
-		// // create an empty layer group to store the results and add it to the map
-		// var results = L.layerGroup().addTo(map);
+		// request a basemap tile layer and add to the map
+		// L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		// 	attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		// }).addTo(map);
 
-		// // listen for the results event and add every result to the map
-		// searchControl.on("results", function (data) {
-		// 	results.clearLayers();
-		// 	for (var i = data.results.length - 1; i >= 0; i--) {
-		// 		results.addLayer(L.marker(data.results[i].latlng));
-		// 	}
-		// });
-		// searchlayer = L.geoJSON.ajax('data.json').addTo(map);
-		// searchlayer.on('data:loaded', function () {
-		// 		map.addControl(new L.Control.Search({layer: searchlayer}));
-		// 	});
+		L.tileLayer(
+			'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+				attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+			}).addTo(map);
 
-		// set global variables for map layer,
-		// mapped attribute, and normalizing attribute
-		//let attributeValue = "WARD";
-		//const normValue = "ward_area";
+		//Add global search functionality to the map
+		// from https://github.com/Esri/esri-leaflet-geocoder
+
 
 		// fetch data from a remote source
-		fetch("data/landRevised_OWNERSHIPandHOLDER.geojson")
+		//fetch("data/landRevised_OWNERSHIPandHOLDER.geojson")
+		fetch("data/informal-settlements-by-ownership.geojson")
 			// after it is returned...
 			.then(function (response) {
 				// if has a property called ok, and it is true
@@ -272,7 +271,18 @@
 				console.log("data is ", data);
 				// Pass the data to the drawMap function
 				drawMap(data);
+
+				// var searchLayer = L.layerGroup().addTo(map);
+				// //... adding data in searchLayer ...
+				// map.addControl(new L.Control.Search({
+				// 	layer: data
+				// }));
+				//searchLayer is a L.LayerGroup contains searched markers
+
 			});
+
+
+
 
 		function drawMap(data) {
 			// function is called one time, once the data is properly loaded. creates a new L.geoJson object and adds it to map, including basic
@@ -285,8 +295,8 @@
 				style: function (feature) {
 					return {
 						color: "#20282e",
-						weight: 0.75,
-						fillOpacity: 1,
+						weight: 0.5,
+						fillOpacity: 0.5,
 						fillColor: "#1f78b4",
 					};
 				},
@@ -322,15 +332,9 @@
 				animate: false
 			});
 
-			updateMap(wards); // draw the map			
+			//updateMap(wards); // draw the map	
 
-		}
 
-		function updateMap(wards) {
-			// function is called initially on the page load and then once every time the user updates the map by selecting a new
-			// dropdown option. function accepts the L.geoJson LayerGroup object as a parameter, loops through all the layers, updates the fillColor
-			// option property based on the calculated (normalized) value, and updates the tooltip with current information.
-			// function also calls the updateLegend function to update with the new classification breaks
 			console.log("wards obj ", wards);
 
 			// get the class breaks for the current data attribute
@@ -353,9 +357,17 @@
 				});
 
 				// assemble string sequence of info for tooltip (end line break with + operator)
-				let tooltipInfo = `ward ${props["WARD"]} </br>
+				// 	let tooltipInfo = `ward ${props["WARD"]} </br>
+				// ownership category: ${props["OWNERSHIP"]}</br>
+				// holder name: ${props["HOLDER_NAME"]}`
+
+				let tooltipInfo = `<b>${props["slum_name"]}</b> </br>
+						SRA 2016 cluster ID: ${props["cluster_id"]} </br>
+						Nearest landmark: ${props["nearest_la"]}</br>
+						CTS numbers: ${props["cts_id"]}</br>
 						ownership category: ${props["OWNERSHIP"]}</br>
-						holder name: ${props["HOLDER_NAME"]}`
+						holder name: ${props["HOLDER_NAME"]}</br>
+						Area: of cluster ${props["cluster_ar"]}`
 
 				// bind a tooltip to layer with ward-specific information
 				layer.bindTooltip(tooltipInfo, {
@@ -364,7 +376,41 @@
 				});
 			});
 			addLegend(breaks);
+
+			var searchControl = new L.Control.Search({
+				layer: wards,
+				propertyName: 'slum_name',
+				marker: false,
+				moveToLocation: function (latlng, title, map) {
+					//map.fitBounds( latlng.layer.getBounds() );
+					var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+					map.setView(latlng, zoom); // access the zoom
+				}
+			});
+
+			searchControl.on('search:locationfound', function (e) {
+
+				console.log('search:locationfound', );
+
+				//map.removeLayer(this._markerSearch)
+
+				e.layer.setStyle({
+					fillColor: '#3f0',
+					color: '#0f0'
+				});
+				if (e.layer._popup)
+					e.layer.openPopup();
+
+			}).on('search:collapsed', function (e) {
+
+				featuresLayer.eachLayer(function (layer) { //restore feature color
+					featuresLayer.resetStyle(layer);
+				});
+			});
+
+			map.addControl(searchControl); //inizialize search control
 		}
+
 
 		function getClassBreaks(wards) {
 			// function accepts the Leaflet L.GeoJson LayerGroup as a parameter and loops through the feature properties
@@ -473,18 +519,38 @@
 					"Land ownership and occupation: Mumbai's contested cityscape";
 				document.getElementById("aboutMap").innerHTML = "About this map";
 				document.getElementById("infoTab").innerHTML =
-					"<p>In 2022, Mumbai city had the 11th highest Property Price Index in the world. Land is limited in the peninsula and is frequently touted by the government as the reason for a large number of informal houses (called bastis or slums, where 52% of the city residents stay). However, there is very less information in the public sphere available about who owns land in the city, how much, and where. </p><p>This map uses data that from the Municipal Corporation of greater Mumbai (MCGM) obtained in December 2020. The dataset obtained has attributes on 'Ward', 'Ownership' and 'Land holder's name' for land parcels in Mumbai.";
+					"<p>The map shows who owns the land that informal settlements are built on. <br><br><img src=\"images/click.png\" style=\"background-color:white;\" width=\"40\" height=\"40\"></img> Click on a feature to see information on cluster ID, CTS number, and land owner.<br><br><img src=\"images/search-icon2.jpeg\" style=\"background-color:white;\" width=\"40\" height=\"40\"></img> Search for settlements by their name using the search icon on the map<br><br><img src=\"images/language.png\" width=\"80\" height=\"70\" ></img> Change the language with the drop down<br></p><p>This map uses data that from the Slum Rehabilitation Authority (SRA) and the Municipal Corporation of greater Mumbai (MCGM) as of December 2020. The dataset obtained has attributes on 'Cluster name', 'CTS number', 'Ownership' and 'Land holder's name' for informal settlement clusters in Mumbai.</p>";
 				// can use + string + between to put in multiple lines
+				document.getElementById("sources").innerHTML =
+					"<li>authored by <a href=\"https://github.com/sanjana-krish\" target=\"_blank\">sanjana</a> | Date: Dec 2022</li><li>Data sources: SRA, MCGM | leaflet search <a href=\"https://github.com/stefanocudini/leaflet-search\" target=\"_blank\">Copyright (c) 2013-2020 Stefano Cudini</a></li>"
 			} else if (document.getElementById("dropBox").value == "hi") {
 				document.getElementById("heading").innerHTML = "जमीन के मालिक और निवासी: मुंबई के विवादित स्थल";
 				document.getElementById("aboutMap").innerHTML = "इस नक्शे की जानकारी";
 				document.getElementById("infoTab").innerHTML =
-					"2022 में, मुंबई शहर का दुनिया में 11वां उच्चतम संपत्ति मूल्य सूचकांक था. भूमि शहर में सीमित है और अक्सर सरकार द्वारा बड़ी संख्या में अनौपचारिक घरों (जिन्हें बस्ती या झुग्गी कहा जाता है, जहां शहर के 52% निवासी रहते हैं) के कारण के रूप में बताया जाता है. <br><br>हालांकि, सार्वजनिक क्षेत्र में बहुत कम जानकारी उपलब्ध है कि शहर में किसकी जमीन है, कितनी और कहां है। यह नक्शा ग्रेटर मुंबई नगर निगम (एमसीजीएम) से दिसंबर 2020 में प्राप्त डेटा का उपयोग करता है। प्राप्त डेटासेट में मुंबई में भूमि पार्सल के लिए 'वार्ड', 'स्वामित्व' और 'भूमि धारक का नाम' की विशेषताएं हैं।";
+					"<p>यह नक्शा दिखाता है कि जिस जमीन पर अनौपचारिक बस्तियां बनी हैं, उसका मालिक कौन है। <br><br><img src=\"images/click.png\" style=\"background-color:white;\" width=\"40\" height=\"40\"></img> क्लस्टर आईडी, सीटीएस नंबर और जमीन के मालिक की जानकारी देखने के लिए इस बटन पर क्लिक करें।<br><br><img src=\"images/search-icon2.jpeg\" style=\"background-color:white;\" width=\"40\" height=\"40\"></img> मानचित्र पर खोज आइकन का उपयोग करके बस्तियों को उनके नाम से खोजें<br><br><img src=\"images/language.png\" width=\"80\" height=\"70\" ></img> ड्रॉप डाउन के साथ भाषा बदलें<br></p><p>यह मानचित्र स्लम पुनर्वास प्राधिकरण (एसआरए) और ग्रेटर मुंबई नगर निगम (एमसीजीएम) से दिसंबर 2020 तक के डेटा का उपयोग करता है। प्राप्त डेटासेट में 'क्लस्टर नाम', 'सीटीएस नंबर', 'स्वामित्व' और 'भूमि' की विशेषताएं हैं। मुंबई में अनौपचारिक बंदोबस्त समूहों के लिए धारक का नाम'।</p>";
+				document.getElementById("sources").innerHTML =
+					"<li>नकाशा निर्माता <a href=\"https://github.com/sanjana-krish\" target=\"_blank\">संजना</a> | दिनांक: दिसंबर 2022</li><li>डेटा स्रोत: एसआरए, एमसीजीएम | लीफलेट खोज <a href=\"https://github.com/stefanocudini/leaflet-search\" target=\"_blank\">कॉपीराइट (सी) 2013-2020 स्टेफानो कुदिनी</a></li>"
 			} else if (document.getElementById("dropBox").value == "mr") {
 				document.getElementById("heading").innerHTML = "जमीन मालक आणि रहिवासी: मुंबईतील वादग्रस्त जागा";
 				document.getElementById("aboutMap").innerHTML = "या नकाशाबद्दल";
 				document.getElementById("infoTab").innerHTML =
-					"2022 मध्ये, मुंबई शहर जगातील सर्वात जास्त मालमत्ता किंमत निर्देशांकात 11 व्या क्रमांकावर होते. शहरात जमीन मर्यादित आहे आणि मोठ्या संख्येने अनौपचारिक घरे (ज्याला बस्ती किंवा झोपडपट्ट्या म्हणतात, जेथे शहरातील 52% रहिवासी राहतात) याचे कारण अनेकदा सरकारद्वारे उद्धृत केले जाते. <br><br> मात्र, शहरात कोणाच्या मालकीची जमीन आहे, किती आणि कुठे आहे, याबाबत सार्वजनिक क्षेत्रात फारशी माहिती उपलब्ध नाही. हा नकाशा डिसेंबर 2020 मध्ये बृहन्मुंबई महानगरपालिकेकडून (MCGM) प्राप्त झालेल्या डेटाचा वापर करतो. मिळवलेल्या डेटासेटमध्ये मुंबईतील जमिनीच्या पार्सलसाठी 'वॉर्ड', 'मालकी' आणि 'जमीनधारकाचे नाव' या विशेषता आहेत.";
+					"<p>हा नकाशा दाखवतो की ज्या जमिनीवर अनौपचारिक वसाहती बांधल्या जातात ती जमीन कोणाच्या मालकीची आहे. <br><br><img src=\"images/click.png\" style=\"background-color:white;\" width=\"40\" height=\"40\"></img> क्लस्टर आयडी, सीटीएस क्रमांक आणि जमीन मालक तपशील पाहण्यासाठी या बटणावर क्लिक करा.<br><br><img src=\"images/search-icon2.jpeg\" style=\"background-color:white;\" width=\"40\" height=\"40\"></img> नकाशावरील शोध चिन्ह वापरून त्यांच्या नावाने सेटलमेंट शोधा<br><br><img src=\"images/language.png\" width=\"80\" height=\"70\" ></img> ड्रॉप डाउन सह भाषा बदला<br></p><p>हा नकाशा डिसेंबर 2020 पर्यंत झोपडपट्टी पुनर्वसन प्राधिकरण (SRA) आणि बृहन्मुंबई महानगरपालिका (MCGM) कडील डेटा वापरतो. मिळवलेल्या डेटासेटमध्ये 'क्लस्टरचे नाव', 'CTS क्रमांक', 'मालकी' आणि 'जमीन' वरील गुणधर्म आहेत. मुंबईतील अनौपचारिक सेटलमेंट क्लस्टर्ससाठी धारकाचे नाव.</p>";
+				document.getElementById("sources").innerHTML =
+					"<li>नकाशा निर्माता <a href=\"https://github.com/sanjana-krish\" target=\"_blank\">संजना</a> | दिनांक: दिसंबर 2022</li><li>डेटा स्रोत: एसआरए, एमसीजीएम | लीफलेट खोज <a href=\"https://github.com/stefanocudini/leaflet-search\" target=\"_blank\">कॉपीराइट (सी) 2013-2020 स्टेफानो कुदिनी</a></li>"
+			}
+		}
+
+		function showHint(str) {
+			if (str.length == 0) {
+				document.getElementById("txtHint").innerHTML = "";
+				return;
+			} else {
+				const xmlhttp = new XMLHttpRequest();
+				xmlhttp.onload = function () {
+					document.getElementById("txtHint").innerHTML = this.responseText;
+				}
+				xmlhttp.open("GET", "gethint.php?q=" + str);
+				xmlhttp.send();
 			}
 		}
 	</script>
