@@ -1,6 +1,20 @@
 # 🚀 (partial) log, issues and To dos
+## 18 Dec 2022
+## changes
+- I have not made a swipe map. Instead, my map shows the informal settlement layer intersected with data from the land ownership dataset. 
+- I added a local search based on settlement name
+- increased transparency and added background sattelite view layer
 
-## Maps
+## things to do
+- change language in legend, footer and popups
+- reorder legend items
+- add timeslider and ata for several years
+- find out what year the satellite map is from
+- check for mobile usability
+- data download button
+
+
+## 09 dec 2022
 ### MAP 1- land ownership
 Hosted on - https://sanjana-krish.github.io/land-in-mumbai/ <br>
 Map shows qualitative colouring based on OWNERSHIP category <br>
@@ -19,7 +33,7 @@ I fixed geometries and reduced the geojson size and retained important features.
 I increased the transparency on the geojson layer to see the background when searching <br>
 I need to replace the base layer with a satellite view for this map. <br>
 
-## Combining the maps- next steps
+### Combining the maps- next steps
 I want to show both the layers together with map swipe/ leaflet side-by-side. <br>
 I tried several different codes online, but most did not work. I have retained the most simple one I found. <br>
 It can be found in modules/mapSwipe.html. It was taken from this link- https://docs.mapbox.com/mapbox-gl-js/example/mapbox-gl-compare/
