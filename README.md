@@ -1,5 +1,6 @@
-[English]([# English](https://github.com/sanjana-krish/land-in-mumbai/blob/main/README.md#land-ownership-and-occupation-mumbais-contested-cityscape))
-[हिंदी](# जमीन मालक आणि रहिवासी: मुंबईतील वादग्रस्त जागा )
+[# English](https://github.com/sanjana-krish/land-in-mumbai/blob/main/README.md#land-ownership-and-occupation-mumbais-contested-cityscape)
+
+[हिंदी](https://github.com/sanjana-krish/land-in-mumbai/blob/main/README.md#%E0%A4%9C%E0%A4%AE%E0%A5%80%E0%A4%A8-%E0%A4%95%E0%A5%87-%E0%A4%AE%E0%A4%BE%E0%A4%B2%E0%A4%BF%E0%A4%95-%E0%A4%94%E0%A4%B0-%E0%A4%A8%E0%A4%BF%E0%A4%B5%E0%A4%BE%E0%A4%B8%E0%A5%80-%E0%A4%AE%E0%A5%81%E0%A4%82%E0%A4%AC%E0%A4%88-%E0%A4%95%E0%A5%87-%E0%A4%B5%E0%A4%BF%E0%A4%B5%E0%A4%BE%E0%A4%A6%E0%A4%BF%E0%A4%A4-%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A4%B2)
 [मराठी](# जमीन मालक आणि रहिवासी: मुंबईतील वादग्रस्त जागा)
 
 
