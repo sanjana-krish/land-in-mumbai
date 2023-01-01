@@ -1,4 +1,9 @@
-# Land ownership and occupation: Mumbai's contested cityscape | 
+[English](# Land ownership and occupation: Mumbai's contested cityscape )
+[हिंदी](# जमीन मालक आणि रहिवासी: मुंबईतील वादग्रस्त जागा )
+[मराठी](# जमीन मालक आणि रहिवासी: मुंबईतील वादग्रस्त जागा)
+
+
+# Land ownership and occupation: Mumbai's contested cityscape 
 
 ## Introduction
 52% of Mumbai lives in informal srttlements (or slums) (Census 2011). However, it is not easy to find information on who owns land and what the property records show. This map visualises information on settlement clusters and their ownership. 
