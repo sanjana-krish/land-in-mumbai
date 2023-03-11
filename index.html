@@ -142,7 +142,7 @@
 				<div id="map"></div>
 			</div>
 			<aside id="about"
-				class="col-md-3 col-lg-5 col-xl-4 order-md-1 text-white py-2 pl-3 bg-secondary overflow-auto">
+				class="col-md-3 col-lg-5 col-xl-4 order-md-1 text-white py-2 pl-3 bg-dark overflow-auto">
 				<section>
 
 					<h3 class="py-2">
@@ -193,7 +193,7 @@
 	</div>
 
 	<!-- legend is outside of container-fluid and will be dynamically added to map -->
-	<div class="bg-secondary py-2 px-3 ml-3 mt-3 text-white" id="legend"></div>
+	<div class="bg-dark py-2 px-3 ml-3 mt-3 text-white" id="legend"></div>
 
 	<!-- Add Bootstrap -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
@@ -218,8 +218,9 @@
 		// initial Leaflet map optionst
 		const options = {
 			zoomSnap: .1,
-			//center: [19.076, 72.97], //[40, -90],
-			zoom: 11, //4,
+			//center: [19.076, 72.97],
+			center: [19.076, 72.89], //[40, -90],
+			zoom: 13.5, //4,
 			zoomControl: false,
 
 		}
@@ -326,12 +327,13 @@
 				},
 			}).addTo(map);
 
-			// fit the map's bounds and zoom level using the wards extent
-			map.fitBounds(wards.getBounds(), {
-				// padding: [50, 0], // add padding around wards
-				paddingBottomRight: [100, 0],
-				animate: false
-			});
+			// // fit the map's bounds and zoom level using the wards extent
+			// map.fitBounds(wards.getBounds(), {
+			// 	// padding: [50, 0], // add padding around wards
+			// 	paddingBottomRight: [100, 0],
+			// 	animate: false
+			// });
+			
 
 			//updateMap(wards); // draw the map	
 
@@ -385,6 +387,7 @@
 				moveToLocation: function (latlng, title, map) {
 					//map.fitBounds( latlng.layer.getBounds() );
 					var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+					//var zoom=19;
 					map.setView(latlng, zoom); // access the zoom
 				}
 			});
